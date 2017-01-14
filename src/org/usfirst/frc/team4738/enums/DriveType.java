@@ -8,15 +8,15 @@ public enum DriveType {
 	
 	MECANUM_PARABOLIC {
 		@Override
-		public double[] getDriveVars(Axes leftStick, Axes rightStick, double angVel) {
+		public double[] getDriveVars(Axes leftStick, Axes rightStick) {
 			
-			double wheel1 = Mathd.curve(leftStick.getY()) - Mathd.curve(leftStick.getX()) + angVel 
+			double wheel1 = Mathd.curve(leftStick.getY()) - Mathd.curve(leftStick.getX()) + rightStick.getX() 
 					* (Constants.WHEEL_ONE.getX() + Constants.WHEEL_ONE.getY());
-			double wheel2 = Mathd.curve(leftStick.getY()) + Mathd.curve(leftStick.getX()) - angVel 
+			double wheel2 = Mathd.curve(leftStick.getY()) + Mathd.curve(leftStick.getX()) - rightStick.getX() 
 					* (Constants.WHEEL_TWO.getX() + Constants.WHEEL_TWO.getY());
-			double wheel3 = Mathd.curve(leftStick.getY()) - Mathd.curve(leftStick.getX()) - angVel 
+			double wheel3 = Mathd.curve(leftStick.getY()) - Mathd.curve(leftStick.getX()) - rightStick.getX() 
 					* (Constants.WHEEL_THREE.getX() + Constants.WHEEL_THREE.getY());
-			double wheel4 = Mathd.curve(leftStick.getY()) + Mathd.curve(leftStick.getX()) + angVel 
+			double wheel4 = Mathd.curve(leftStick.getY()) + Mathd.curve(leftStick.getX()) + rightStick.getX() 
 					* (Constants.WHEEL_FOUR.getX() + Constants.WHEEL_FOUR.getY());
 			
 			double[] speeds = {wheel1, wheel2, wheel3, wheel4};
@@ -25,14 +25,14 @@ public enum DriveType {
 	},
 	MECANUM_LINEAR {
 		@Override
-		public double[] getDriveVars(Axes leftStick, Axes rightStick, double angVel) {
-			double wheel1 = leftStick.getY() - leftStick.getX() + angVel 
+		public double[] getDriveVars(Axes leftStick, Axes rightStick) {
+			double wheel1 = leftStick.getY() - leftStick.getX() + rightStick.getX() 
 					* (Constants.WHEEL_ONE.getX() + Constants.WHEEL_ONE.getY());
-			double wheel2 = leftStick.getY() + leftStick.getX() - angVel 
+			double wheel2 = leftStick.getY() + leftStick.getX() - rightStick.getX() 
 					* (Constants.WHEEL_TWO.getX() + Constants.WHEEL_TWO.getY());
-			double wheel3 = leftStick.getY() - leftStick.getX() - angVel 
+			double wheel3 = leftStick.getY() - leftStick.getX() - rightStick.getX() 
 					* (Constants.WHEEL_THREE.getX() + Constants.WHEEL_THREE.getY());
-			double wheel4 = leftStick.getY() + leftStick.getX() + angVel 
+			double wheel4 = leftStick.getY() + leftStick.getX() + rightStick.getX() 
 					* (Constants.WHEEL_FOUR.getX() + Constants.WHEEL_FOUR.getY());
 			
 			double[] speeds = {wheel1, wheel2, wheel3, wheel4};
@@ -41,7 +41,7 @@ public enum DriveType {
 	},
 	ARCADE_LINEAR {
 		@Override
-		public double[] getDriveVars(Axes leftStick, Axes rightStick, double angVel) {
+		public double[] getDriveVars(Axes leftStick, Axes rightStick) {
 			double[] speeds = {
 					leftStick.getX()+leftStick.getY(),
 					leftStick.getX()-leftStick.getY(),
@@ -53,7 +53,7 @@ public enum DriveType {
 	},
 	ARCADE_PARABOLIC {
 		@Override
-		public double[] getDriveVars(Axes leftStick, Axes rightStick, double angVel) {
+		public double[] getDriveVars(Axes leftStick, Axes rightStick) {
 			double[] speeds = {
 					Mathd.curve(leftStick.getX()) + Mathd.curve(leftStick.getY()),
 					Mathd.curve(leftStick.getX()) - Mathd.curve(leftStick.getY()),
@@ -66,7 +66,7 @@ public enum DriveType {
 	},
 	TANK_LINEAR {
 		@Override
-		public double[] getDriveVars(Axes leftStick, Axes rightStick, double angVel) {
+		public double[] getDriveVars(Axes leftStick, Axes rightStick) {
 			double[] speeds = {
 					leftStick.getY(),
 					rightStick.getY(),
@@ -78,7 +78,7 @@ public enum DriveType {
 	},
 	TANK_PARABOLIC {
 		@Override
-		public double[] getDriveVars(Axes leftStick, Axes rightStick, double angVel) {
+		public double[] getDriveVars(Axes leftStick, Axes rightStick) {
 			double[] speeds = {
 					Mathd.curve(leftStick.getY()),
 					Mathd.curve(rightStick.getY()),
@@ -89,5 +89,5 @@ public enum DriveType {
 		}
 	};
 	
-	public abstract double[] getDriveVars(Axes leftStick, Axes rightStick, double angVel);	
+	public abstract double[] getDriveVars(Axes leftStick, Axes rightStick);	
 }

@@ -30,8 +30,8 @@ public class Drive {
 	 * @param yAxis y-axis of the joystick
 	 */
 	
-	public void drive(Axes leftStick, Axes rightStick, double angVel) {
-		double[] speeds = Constants.DRIVE_MODEL.getDriveVars(leftStick, rightStick, angVel);
+	public void drive(Axes leftStick, Axes rightStick) {
+		double[] speeds = Constants.DRIVE_MODEL.getDriveVars(leftStick, rightStick);
 		for (int i = 0; i < motors.size(); i++) {
 			motors.get(i).set(speeds[i]);
 		}

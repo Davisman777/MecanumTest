@@ -31,14 +31,14 @@ public class RobotControl {
 	boolean lookingForward = true;
 	boolean overrideCam = false;
 	
-	public RobotControl(){
-		drive = new Drive(Constants.PWM_PORT[0], Constants.PWM_PORT[1]);
-		intakeMotor = new VictorSP(Constants.PWM_PORT[2]);
-		rampMotor = new VictorSP(Constants.PWM_PORT[3]);
+	public RobotControl() {
+		drive = new Drive(Constants.PWM_PORT[0], Constants.PWM_PORT[1], Constants.PWM_PORT[2], Constants.PWM_PORT[3]);
+//		intakeMotor = new VictorSP(Constants.PWM_PORT[2]);
+//		rampMotor = new VictorSP(Constants.PWM_PORT[3]);
 		topButton = new DigitalInput(Constants.DIO_PORT[4]);
 		bottomButton = new DigitalInput(Constants.DIO_PORT[5]);
 		
-		pickup = new Pickup(intakeMotor, rampMotor, topButton, bottomButton);
+//		pickup = new Pickup(intakeMotor, rampMotor, topButton, bottomButton);
 	}
 	
 	public void updateControl(XboxController xbox, Gamepad gamepad){
@@ -53,9 +53,9 @@ public class RobotControl {
 		lookingForward = xbox.getToggle(XboxButtons.A);
 		
 		if(lookingForward){
-			drive.drive(xbox.getLeftStick(), xbox.getRightStick(), 0D);
+			drive.drive(xbox.getLeftStick(), xbox.getRightStick());
 		} else{
-			drive.drive(xbox.getLeftStick().invert(), xbox.getRightStick().invert(), 0D);
+			drive.drive(xbox.getLeftStick().invert(), xbox.getRightStick().invert());
 		}
 	}
 	
