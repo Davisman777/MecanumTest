@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4738.util;
 
+import org.usfirst.frc.team4738.wrapper.Axes;
 
 public class Mathd{
 
@@ -19,6 +20,10 @@ public class Mathd{
 	 */
 	public static double curve(double value) {
 		return value * Math.abs(value);
+	}
+	
+	public static Axes curveAxes(Axes axes) { 
+		return new Axes(curve(axes.getX()),curve(axes.getY()));
 	}
 	
 }

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4738.enums;
 
-import org.usfirst.frc.team4738.Constants;
 import org.usfirst.frc.team4738.util.Mathd;
 import org.usfirst.frc.team4738.wrapper.Axes;
 
@@ -9,33 +8,26 @@ public enum DriveType {
 	MECANUM_PARABOLIC {
 		@Override
 		public double[] getDriveVars(Axes leftStick, Axes rightStick) {
-			
-			double wheel1 = Mathd.curve(leftStick.getY()) - Mathd.curve(leftStick.getX()) + rightStick.getX() 
-					* (Constants.WHEEL_ONE.getX() + Constants.WHEEL_ONE.getY());
-			double wheel2 = Mathd.curve(leftStick.getY()) + Mathd.curve(leftStick.getX()) - rightStick.getX() 
-					* (Constants.WHEEL_TWO.getX() + Constants.WHEEL_TWO.getY());
-			double wheel3 = Mathd.curve(leftStick.getY()) - Mathd.curve(leftStick.getX()) - rightStick.getX() 
-					* (Constants.WHEEL_THREE.getX() + Constants.WHEEL_THREE.getY());
-			double wheel4 = Mathd.curve(leftStick.getY()) + Mathd.curve(leftStick.getX()) + rightStick.getX() 
-					* (Constants.WHEEL_FOUR.getX() + Constants.WHEEL_FOUR.getY());
-			
-			double[] speeds = {wheel1, wheel2, wheel3, wheel4};
+			Axes leftStickC = Mathd.curveAxes(leftStick);
+			Axes rightStickC = Mathd.curveAxes(rightStick);
+			double[] speeds = {
+				leftStickC.getY() * Math.sin(rightStickC.getX() + Math.PI/4) + leftStickC.getX(),
+				leftStickC.getY() * Math.cos(rightStickC.getX() + Math.PI/4) - leftStickC.getX(),
+				leftStickC.getY() * Math.cos(rightStickC.getX() + Math.PI/4) + leftStickC.getX(),
+				leftStickC.getY() * Math.sin(rightStickC.getX() + Math.PI/4) - leftStickC.getX(),
+			};
 			return speeds;
 		}
 	},
 	MECANUM_LINEAR {
 		@Override
 		public double[] getDriveVars(Axes leftStick, Axes rightStick) {
-			double wheel1 = leftStick.getY() - leftStick.getX() + rightStick.getX() 
-					* (Constants.WHEEL_ONE.getX() + Constants.WHEEL_ONE.getY());
-			double wheel2 = leftStick.getY() + leftStick.getX() - rightStick.getX() 
-					* (Constants.WHEEL_TWO.getX() + Constants.WHEEL_TWO.getY());
-			double wheel3 = leftStick.getY() - leftStick.getX() - rightStick.getX() 
-					* (Constants.WHEEL_THREE.getX() + Constants.WHEEL_THREE.getY());
-			double wheel4 = leftStick.getY() + leftStick.getX() + rightStick.getX() 
-					* (Constants.WHEEL_FOUR.getX() + Constants.WHEEL_FOUR.getY());
-			
-			double[] speeds = {wheel1, wheel2, wheel3, wheel4};
+			double[] speeds = {
+				leftStick.getY() * Math.sin(rightStick.getX() + Math.PI/4) + leftStick.getX(),
+				leftStick.getY() * Math.cos(rightStick.getX() + Math.PI/4) - leftStick.getX(),
+				leftStick.getY() * Math.cos(rightStick.getX() + Math.PI/4) + leftStick.getX(),
+				leftStick.getY() * Math.sin(rightStick.getX() + Math.PI/4) - leftStick.getX(),
+			};
 			return speeds;
 		}
 	},
