@@ -1,0 +1,24 @@
+public class AutonomusCodes extends Encoder {
+
+  //init. variables "circumfrence, diameter"
+  
+  public double circumference;
+  public double diameter;
+  
+  //solve circumference for diameter
+  
+  circumfrence = Math.PI * diameter;
+    
+  //get distance based on circumference and encoder values
+  //get encoder value
+  
+  public double getRotation(){
+  return get() / 2048;
+  }
+  //get distance
+  
+  public double getDistance(){
+  
+  return getRotation() * circumference / 12;
+}
+}
